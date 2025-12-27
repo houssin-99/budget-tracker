@@ -1,1 +1,87 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+  background: linear-gradient(135deg, #eef2f3, #dfe6e9);
+  min-height: 100vh;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Center content clean */
+.app-container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 40px 20px;
+}
+
+/* Title */
+.app-title {
+  font-size: 2.6rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 30px;
+  color: #222;
+}
+
+/* Dashboard cards */
+.dashboard-card {
+  background: white;
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  width: 260px;
+}
+
+.dashboard-card p {
+  font-size: 1.05rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Add form */
+.form-card {
+  background: white;
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+/* Transactions list */
+.transaction-card {
+  background: white;
+  border-radius: 14px;
+  padding: 14px 18px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.transaction-card.expense { border-left: 5px solid #e74c3c; }
+.transaction-card.income  { border-left: 5px solid #27ae60; }
+
+.transaction-card button {
+  border: none;
+  background: #ff4d4d;
+  color: white;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+}
+/* DELETE BUTTON - PREMIUM */
+.delete-btn {
+  background: #ff4d6d;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 50px;
+  font-weight: 600;
+  letter-spacing: .5px;
+  cursor: pointer;
+  transition: all .25s ease;
+}
+
+.delete-btn:hover {
+  background: #ff1e48;
+  box-shadow: 0 8px 18px rgba(255, 70, 90, 0.5);
+  transform: translateY(-2px) scale(1.05);
+}
+
