@@ -316,3 +316,41 @@ select {
   transition: .25s;
 }
 
+/* Mobile spacing tune */
+@media (max-width: 500px) {
+  .glass-card {
+    padding: 1.3rem !important;
+  }
+
+  .lux-input {
+    margin-bottom: 14px !important;
+    height: 55px;
+    font-size: 1rem;
+  }
+
+  .btn-lux, .add-btn {
+    padding: 16px !important;
+    font-size: 1.05rem;
+    margin-top: 8px;
+  }
+}
+
+/* Mobile spacing tune */
+@media (max-width: 500px) {
+  .glass-card {
+    padding: 1.3rem !important;
+  }
+
+  .lux-input {
+    margin-bottom: 14px !important;
+    height: 55px;
+    font-size: 1rem;
+  }
+
+  .btn-lux, .add-btn {
+    padding: 16px !important;
+    font-size: 1.05rem;
+    margin-top: 8px;
+  }
+}
+
