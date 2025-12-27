@@ -27,10 +27,8 @@ interface Goal {
 })
 export class App {
 
-  // 📌 1) Storage Key (alles op 1 plaats)
   private STORAGE_KEY = 'budget-tracker-data';
 
-  // 📌 2) Signals
   transactions = signal<Transaction[]>([
     {
       id: 1,
@@ -110,7 +108,6 @@ export class App {
     this.draftCategory = '';
   }
 
-  // 📌 6) Automatische categorie detectie (basis AI)
   autoDetectCategory(desc: string) {
     const text = desc.toLowerCase();
     const categories: Record<string, string> = {
