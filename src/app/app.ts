@@ -1,4 +1,4 @@
-import { Component, signal, effect } from '@angular/core';
+import { Component, signal, effect, OnInit, runInInjectionContext, Injector } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import Chart from 'chart.js/auto';
@@ -25,42 +25,34 @@ interface Goal {
   templateUrl: './app.html',
   styleUrls: ['./app.css']
 })
-export class App {
+export class App implements OnInit {
+  constructor(private injector: Injector) {}
 
   private STORAGE_KEY = 'budget-tracker-data';
 
-  transactions = signal<Transaction[]>([
-    {
-      id: 1,
-      date: '2024-01-15',
-      description: 'Salary',
-      amount: 2000,
-      type: 'income',
-      category: 'Income'
-    },
-    {
-      id: 2,
-      date: '2024-01-16',
-      description: 'Groceries',
-      amount: 80,
-      type: 'expense',
-      category: 'Food'
-    }
-  ]);
+// -----------------------------------------
+// 📌 State & Inputs (No errors now)
+// -----------------------------------------
+transactions = signal<Transaction[]>([
+  { id: 1, date: '2024-01-15', description: 'Salary', amount: 2000, type: 'income', category: 'Income' },
+  { id: 2, date: '2024-01-16', description: 'Groceries', amount: 80, type: 'expense', category: 'Food' }
+]);
 
-  goals = signal<Goal[]>([]);
+goals = signal<Goal[]>([]);
 
-  // 📌 Input velden
-  draftDescription = '';
-  draftAmount: number | null = null;
-  draftType: 'income' | 'expense' = 'expense';
-  draftCategory = '';
-  draftGoalName = '';
-  draftGoalTarget: number | null = null;
+draftDescription = '';
+draftAmount: number | null = null;
+draftType: 'income' | 'expense' = 'expense';
+draftCategory = '';
+draftGoalName = '';
+draftGoalTarget: number | null = null;
 
-  chart: any;
+chart: any;
 
-  // 📌 3) On Init - Load + autosave
+
+  // -----------------------------
+  // 🔧 FIXED ngOnInit (NO MORE ERROR)
+  // -----------------------------
   ngOnInit() {
     const saved = localStorage.getItem(this.STORAGE_KEY);
     if (saved) {
@@ -69,13 +61,18 @@ export class App {
       this.goals.set(data.goals || []);
     }
 
-    effect(() => {
-      this.saveData();
-      this.updateChart();
+    // 👇 BELANGRIJK: effect binnen injection context!
+    runInInjectionContext(this.injector, () => {
+      effect(() => {
+        this.saveData();
+        this.updateChart();
+      });
     });
   }
 
-  // 📌 4) Save in één object (future proof)
+  // -----------------------------
+  // SAVE SYSTEM
+  // -----------------------------
   saveData() {
     const data = {
       transactions: this.transactions(),
@@ -84,7 +81,9 @@ export class App {
     localStorage.setItem(this.STORAGE_KEY, JSON.stringify(data));
   }
 
-  // 📌 5) Transaction toevoegen
+  // -----------------------------
+  // TRANSACTIONS
+  // -----------------------------
   addTransaction() {
     if (!this.draftDescription.trim() || this.draftAmount === null) return;
 
@@ -108,7 +107,7 @@ export class App {
     this.draftCategory = '';
   }
 
-  autoDetectCategory(desc: string) {
+  autoDetectCategory(desc: string): void {
     const text = desc.toLowerCase();
     const categories: Record<string, string> = {
       food: 'Food', burger: 'Food', pizza: 'Food', kebab: 'Food',
@@ -118,6 +117,7 @@ export class App {
       movie: 'Entertainment', game: 'Entertainment',
       salary: 'Income', bonus: 'Income', paycheck: 'Income'
     };
+
     for (const keyword in categories) {
       if (text.includes(keyword)) {
         this.draftCategory = categories[keyword];
@@ -131,7 +131,9 @@ export class App {
     this.transactions.update(current => current.filter(t => t.id !== id));
   }
 
-  // 📌 7) Goals
+  // -----------------------------
+  // GOALS
+  // -----------------------------
   addGoal() {
     if (!this.draftGoalName.trim() || !this.draftGoalTarget) return;
 
@@ -157,7 +159,9 @@ export class App {
     return Math.min(100, Math.round((this.balance / goal.target) * 100));
   }
 
-  // 📌 8) Filters
+  // -----------------------------
+  // FILTER SYSTEM
+  // -----------------------------
   filter = signal<'all' | 'income' | 'expense'>('all');
 
   setFilter(type: 'all' | 'income' | 'expense') {
@@ -172,7 +176,9 @@ export class App {
     return all;
   }
 
-  // 📌 9) Calculations
+  // -----------------------------
+  // BALANCE CALC
+  // -----------------------------
   get income() {
     return this.transactions().filter(t => t.type === 'income').reduce((s, t) => s + t.amount, 0);
   }
@@ -185,7 +191,9 @@ export class App {
     return this.income - this.expenses;
   }
 
-  // 📌 10) Graph
+  // -----------------------------
+  // CHART
+  // -----------------------------
   updateChart() {
     if (this.chart) this.chart.destroy();
     const ctx = document.getElementById('balanceChart') as HTMLCanvasElement;
