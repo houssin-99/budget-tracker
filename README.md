@@ -21,5 +21,5 @@ Een moderne fintech-achtige budgetapp gebouwd met Angular, Signals, Chart.js en 
 *(hier voeg je screenshots toe van je app)*
 
 ## 👤 Author
-- Naam
-- LinkedIn / Portfolio (optioneel)
+- Housen Al Ghafra
+  
