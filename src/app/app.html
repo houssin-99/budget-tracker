@@ -1,5 +1,11 @@
 <div class="luxury-bg"></div>
 <div class="container py-5">
+<nav class="nav-menu">
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">🏠 Home</a>
+    <a routerLink="/analytics" routerLinkActive="active">📊 Analytics</a>
+    <a routerLink="/settings" routerLinkActive="active">⚙️ Settings</a>
+</nav>
+<router-outlet></router-outlet>
 
   <!-- HEADER -->
   <header class="text-center mb-5">

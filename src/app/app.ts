@@ -1,6 +1,8 @@
 import { Component, signal, effect, OnInit, runInInjectionContext, Injector } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterOutlet } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import Chart from 'chart.js/auto';
 
 interface Transaction {
@@ -21,7 +23,7 @@ interface Goal {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterOutlet, RouterModule],
   templateUrl: './app.html',
   styleUrls: ['./app.css']
 })

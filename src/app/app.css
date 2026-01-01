@@ -364,4 +364,28 @@ header p.lead {
   opacity: 0.92;
   letter-spacing: 0.3px;
 }
+.nav-menu {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.nav-menu a {
+  color: white;
+  text-decoration: none;
+  opacity: .6;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.nav-menu a:hover {
+  opacity: 1;
+}
+
+.nav-menu a.active {
+  opacity: 1;
+  border-bottom: 2px solid #00ffc3;
+  padding-bottom: 4px;
+}
 

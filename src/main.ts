@@ -1,6 +1,24 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
+import { provideRouter, Routes } from '@angular/router';
 import { App } from './app/app';
 
-bootstrapApplication(App, appConfig)
-  .catch((err) => console.error(err));
+const routes: Routes = [
+  { path: '',
+    loadComponent: () =>
+      import('./app/pages/home/home').then(m => m.HomePage),
+    component: App },
+  {
+    path: 'analytics',
+    loadComponent: () =>
+      import('./app/pages/analytics').then(m => m.AnalyticsPage),
+  },
+  {
+    path: 'settings',
+    loadComponent: () =>
+      import('./app/pages/setting').then(m => m.SettingsPage),
+  },
+];
+
+bootstrapApplication(App, {
+  providers: [provideRouter(routes)]
+}).catch(err => console.error(err));
