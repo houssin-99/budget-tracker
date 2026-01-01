@@ -13,7 +13,7 @@
 
 /* 🍏 HEADER */
 .text-gradient {
-  background: linear-gradient(90deg, #ffffff, #d3d3d3, #b1b1b3);
+  background: linear-gradient(90deg, #218830, #faeded, #b1b1b3);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -354,3 +354,10 @@ select {
   }
 }
 
+header p.lead {
+  background: linear-gradient(90deg, #ffffff, #c6c3c3);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  opacity: 0.9;
+}
