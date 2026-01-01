@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
-import { App } from '../../app';
+import { App } from '../../app'; // <-- correcte pad naar app.ts
 
 @Component({
   standalone: true,
-  imports: [App],
-  template: `
-    <app-root></app-root>
-    `
+  templateUrl: './home.html',
+  imports: [App]  // <---- hierdoor werkt <app></app>
 })
 export class HomePage {}
