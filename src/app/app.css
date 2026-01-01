@@ -355,9 +355,13 @@ select {
 }
 
 header p.lead {
-  background: linear-gradient(90deg, #ffffff, #c6c3c3);
+  font-weight: 400;
+  font-size: 1.05rem;
+  background: linear-gradient(90deg, #ffffff, #e7e7e7, #cfcfcf);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  opacity: 0.9;
+  opacity: 0.92;
+  letter-spacing: 0.3px;
 }
+
